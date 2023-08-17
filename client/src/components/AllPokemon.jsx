@@ -5,7 +5,7 @@ const AllPokemon = () => {
     const [allPokemon, setAllPokemon] = useState([]);
 
     useEffect(() => {
-        fetch('https://pokefight-6jjg.onrender.com/')
+        fetch('https://pokefight-6jjg.onrender.com/pokemon')
         .then(response => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
@@ -22,7 +22,7 @@ const AllPokemon = () => {
             <ul>
                 {allPokemon.map((pokemon, index) => (
                     <li key={index}>
-                        <Link to={`/pokemon/${index + 1}`}>{pokemon.name}</Link>
+                        <Link to={`/pokemon/${index + 1}`}>{Object.values(pokemon.name)}</Link>
                     </li>
                 ))}
             </ul>
