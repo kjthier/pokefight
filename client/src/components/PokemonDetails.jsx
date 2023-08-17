@@ -26,22 +26,16 @@ const PokemonDetails = () => {
     return (
         <div>
             <h2>Pokemon Details</h2>
-            <p>ID: {Object.values(pokemonDetails.name)}</p>
+            <p>ID: {id}</p>
             <p>Name (English): {pokemonDetails.name?.english}</p>
             <p>(Japanese): {pokemonDetails.name?.japanese}</p>
             <p>(Chinese): {pokemonDetails.name?.chinese}</p>
             <p>(French): {pokemonDetails.name?.french}</p>
-            <p>Type: {Object.values(pokemonDetails.type?.join(', '))}</p>
-            <h3>
-                <Link to={`/pokemon/${id}/base`}>Base Stats:</Link>
-            </h3>
-            <ul style={{ listStyleType: 'none', padding: 0 }}> 
-                {Object.entries(pokemonDetails.base).map(([stat, value]) => (
-                    <li key={stat}>
-                        {stat}: {value}
-                    </li>
-                ))}
-            </ul>
+            <p>Type: {pokemonDetails.type?.join(', ')}</p>
+            <p>
+                <Link to={`/pokemon/${id}/base`}>Base Stats</Link>
+            </p>
+            
         </div>
     );
 };
