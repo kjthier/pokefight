@@ -31,9 +31,7 @@ const PokemonDetails = () => {
             <p>(Japanese): {pokemonDetails.name?.japanese}</p>
             <p>(Chinese): {pokemonDetails.name?.chinese}</p>
             <p>(French): {pokemonDetails.name?.french}</p>
-
-
-           <p>Type: {Object.values(pokemonDetails.type?.join(', '))}</p>
+            <p>Type: {Object.values(pokemonDetails.type?.join(', '))}</p>
             <h3>
                 <Link to={`/pokemon/${id}/base`}>Base Stats:</Link>
             </h3>
