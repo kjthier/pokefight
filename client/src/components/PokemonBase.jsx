@@ -1,36 +1,29 @@
-import { useState, useEffect } from 'react';
+import useFetchDetails from '../hooks/useFetchDetails';
 import { useParams } from 'react-router-dom';
 
-const PokemonBase = () => {
-    const [pokemonBase, setPokemonBase] = useState({});
+export default function PokemonBase() {
     const { id } = useParams();
+    const pokemonDetails = useFetchDetails(id);
 
-    useEffect( () => {
-        fetch(`https://pokefight-6jjg.onrender.com/pokemon/${id}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => setPokemonBase(data))
-        .catch(error => console.error('Failed to fetch Pokemon base:', error));
-    }, [id]);
-    
-    console.log(pokemonBase);
+    console.log("pokemonDetails:", pokemonDetails); // Check the content of pokemonDetails
+
+    if (!pokemonDetails || !pokemonDetails.base) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>
-        <h1>Base Stats</h1>
-        <ul style={{ listStyleType: 'none', padding: 0 }}> 
-                {Object.entries(pokemonBase).map(([stat, value]) => (
+            <h1>Base Stats</h1>
+            <ul style={{ 
+                listStyleType: 'none', 
+                padding: 0 
+            }}> 
+                {Object.entries(pokemonDetails.base).map(([stat, value]) => (
                     <li key={stat}>
                         {stat}: {value}
                     </li>
                 ))}
             </ul>
         </div>
-    )
+    );
 }
-
-export default PokemonBase;

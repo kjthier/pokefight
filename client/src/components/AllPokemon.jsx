@@ -1,33 +1,19 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import useFetchAll from '../hooks/useFetchAll'
+import { Link } from 'react-router-dom'
 
-const AllPokemon = () => {
-    const [allPokemon, setAllPokemon] = useState([]);
-
-    useEffect(() => {
-        fetch('https://pokefight-6jjg.onrender.com/pokemon')
-        .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then(data => setAllPokemon(data))
-          .catch(error => console.error('Failed to fetch all Pokemon:', error));
-    }, []);
-
+export default function AllPokemon() {
+    const allPokemon = useFetchAll() 
+    
     return (
         <div>
             <h2>All Pokemon</h2>
             <ul>
-                {allPokemon.map((pokemon, index) => (
-                    <li key={index}>
-                        <Link to={`/pokemon/${index + 1}`}>{Object.values(pokemon.name)}</Link>
+                {allPokemon.map(pokemon => (
+                    <li key={pokemon.id}>
+                        <Link to={`/pokemon/${pokemon.id}`}>{pokemon.name.english}</Link>
                     </li>
                 ))}
             </ul>
         </div>
-    );
-};
-
-export default AllPokemon;
+    )
+}
